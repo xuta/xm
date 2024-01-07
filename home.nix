@@ -17,10 +17,29 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
+  home.packages = with pkgs; [
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
+    unixtools.top
+    htop
+    ncdu
+    unzip
+    wget
+    curl
+    git
+
+    bat
+    jq
+    fd
+    ripgrep
+    fzf
+
+    ranger
+    tmux
+    helix
+    vim
+    neovim
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -67,8 +86,18 @@
   #  /etc/profiles/per-user/xuta/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "hx";
   };
+
+  # programs.bash = {
+  #   enable = true;
+  #   # sessionVariables = {
+  #   #   EDITOR = "vim";
+  #   # };
+  #   initExtra = ''
+  #     . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+  #   '';
+  # };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
