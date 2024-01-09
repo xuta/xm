@@ -89,15 +89,26 @@
     EDITOR = "hx";
   };
 
-  # programs.bash = {
-  #   enable = true;
-  #   # sessionVariables = {
-  #   #   EDITOR = "vim";
-  #   # };
-  #   initExtra = ''
-  #     . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
-  #   '';
-  # };
+  programs.dircolors.enable = true;
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+      export PS1="\e[45m\u@\h:\w $\e[m "
+    '';
+    shellAliases = {
+      ls = "ls --color=auto";
+      grep = "grep --color=auto";
+      fgrep = "fgrep --color=auto";
+      egrep = "egrep --color=auto";
+    };
+  };
+
+
+  programs.git = {
+    enable = true;
+    userName = "Xuta Le";
+    userEmail = "xuta.le@gmail.com";
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
