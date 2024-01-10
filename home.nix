@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -55,6 +55,12 @@
     # '')
   ];
 
+  home.activation = {
+    myActivationAction = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    $DRY_RUN_CMD ln -nfs ${config.home.homeDirectory}/workspace/xm ${config.home.homeDirectory}/.config/home-manager
+  '';
+  };
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
@@ -93,7 +99,7 @@
   programs.bash = {
     enable = true;
     initExtra = ''
-      export PS1="\e[45m\u@\h:\w $\e[m "
+      export PS1="\[\033[m\]|\[\033[1;35m\]\t\[\033[m\]|\[\e[1m\]\u\[\e[1;36m\]\[\033[m\]@\[\e[1;36m\]\h\[\033[m\]:\[\e[0m\]\[\e[1;32m\]\W> \[\e[0m\]"
     '';
     shellAliases = {
       ls = "ls --color=auto";
