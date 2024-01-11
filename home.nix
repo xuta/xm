@@ -28,6 +28,7 @@
     wget
     curl
     git
+    lazygit
 
     bat
     jq
@@ -56,9 +57,9 @@
   ];
 
   home.activation = {
-    myActivationAction = lib.hm.dag.entryAfter ["writeBoundary"] ''
-    $DRY_RUN_CMD ln -nfs ${config.home.homeDirectory}/workspace/xm ${config.home.homeDirectory}/.config/home-manager
-  '';
+  #   myActivationAction = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  #   $DRY_RUN_CMD ln -nfs ${config.home.homeDirectory}/workspace/xm ${config.home.homeDirectory}/.config/home-manager
+  # '';
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -99,7 +100,7 @@
   programs.bash = {
     enable = true;
     initExtra = ''
-      export PS1="\[\033[m\]|\[\033[1;35m\]\t\[\033[m\]|\[\e[1m\]\u\[\e[1;36m\]\[\033[m\]@\[\e[1;36m\]\h\[\033[m\]:\[\e[0m\]\[\e[1;32m\]\W> \[\e[0m\]"
+      export PS1="\[\033[m\]|\[\033[1;35m\]\t\[\033[m\]|\[\e[1m\]\u\[\e[1;36m\]\[\033[m\]@\[\e[1;36m\]\h\[\033[m\]:\[\e[0m\]\[\e[1;32m\]\w > \[\e[0m\]"
     '';
     shellAliases = {
       ls = "ls --color=auto";
@@ -115,6 +116,12 @@
     userName = "Xuta Le";
     userEmail = "xuta.le@gmail.com";
   };
+
+  # programs.neovim = {
+  #   enable = true;
+  #   package = pkgs.neovim;
+  #   plugins.lazyvim.enable = true;
+  # };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
