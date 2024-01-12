@@ -21,6 +21,7 @@
     # # Adds the 'hello' command to your environment. It prints a friendly
     # # "Hello, world!" when run.
     # pkgs.hello
+    gcc
     unixtools.top
     htop
     ncdu
@@ -34,13 +35,18 @@
     jq
     fd
     ripgrep
-    fzf
 
     ranger
     tmux
     helix
     vim
-    neovim
+    tree-sitter
+    nodejs
+    xclip
+
+    # (
+    #   nerdfonts.override { fonts = [ "FiraCode" ]; }
+    # )
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -57,9 +63,24 @@
   ];
 
   home.activation = {
-  #   myActivationAction = lib.hm.dag.entryAfter ["writeBoundary"] ''
-  #   $DRY_RUN_CMD ln -nfs ${config.home.homeDirectory}/workspace/xm ${config.home.homeDirectory}/.config/home-manager
-  # '';
+    tmux = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      setup_tmux() {
+        echo "setup tmux"
+        $DRY_RUN_CMD ln -nfs ${config.home.homeDirectory}/.config/home-manager/.tmux/.tmux.conf ~/
+        $DRY_RUN_CMD ln -nfs ${config.home.homeDirectory}/.config/home-manager/.tmux/.tmux.conf.local ~/
+      }
+      
+      [ -f ~/.tmux.conf ] || setup_tmux
+    '';
+
+    lazyvim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      setup_lazyvim() {
+        echo "setup lazyvim"
+        $DRY_RUN_CMD ln -nfs ${config.home.homeDirectory}/.config/home-manager/starter ~/.config/nvim
+      }
+      
+      [ -d ~/.config/nvim ] || setup_lazyvim
+    '';
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -117,11 +138,12 @@
     userEmail = "xuta.le@gmail.com";
   };
 
-  # programs.neovim = {
-  #   enable = true;
-  #   package = pkgs.neovim;
-  #   plugins.lazyvim.enable = true;
-  # };
+  programs.neovim.enable = true;
+
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
