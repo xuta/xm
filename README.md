@@ -10,3 +10,8 @@ git submodule init
 git submodule update
 home-manager switch
 ```
+
+## What's next
+
+* [ ] fzf
+* [ ] Alacritty  # Terminal
