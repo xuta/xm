@@ -18,9 +18,6 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
     gcc
     unixtools.top
     htop
@@ -38,10 +35,7 @@
 
     ranger
     tmux
-    helix
     vim
-    tree-sitter
-    nodejs
     xclip
 
     # (
@@ -71,15 +65,6 @@
       }
       
       [ -f ~/.tmux.conf ] || setup_tmux
-    '';
-
-    lazyvim = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-      setup_lazyvim() {
-        echo "setup lazyvim"
-        $DRY_RUN_CMD ln -nfs ${config.home.homeDirectory}/.config/home-manager/starter ~/.config/nvim
-      }
-      
-      [ -d ~/.config/nvim ] || setup_lazyvim
     '';
   };
 
@@ -113,9 +98,6 @@
   #
   #  /etc/profiles/per-user/xuta/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    EDITOR = "hx";
-  };
 
   programs.dircolors.enable = true;
   programs.bash = {
@@ -138,11 +120,36 @@
     userEmail = "xuta.le@gmail.com";
   };
 
-  programs.neovim.enable = true;
-
   programs.fzf = {
     enable = true;
     enableBashIntegration = true;
+  };
+
+  programs.helix = {
+    enable = true;
+    defaultEditor = true;
+    settings = {
+      theme = "dracula";
+
+      editor = {
+        true-color = true;
+        cursorline = true;
+        bufferline = "always";
+        rulers = [90 120];
+
+        file-picker.hidden = false;
+        soft-wrap.enable = true;
+        cursor-shape.insert = "bar";
+        statusline = {
+          left = ["mode" "spinner" "file-name" "version-control" "read-only-indicator"];
+          right = ["diagnostics" "selections" "position" "file-encoding" "file-line-ending" "file-type"];
+        };
+      };
+
+      keys.normal = {
+        space.space = "file_picker";
+      };
+    };
   };
 
   # Let Home Manager install and manage itself.

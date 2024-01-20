@@ -2,7 +2,3 @@
 	path = .tmux
 	url = git@github.com:gpakosz/.tmux.git
 	branch = master
-[submodule "starter"]
-	path = starter
-	url = git@github.com:LazyVim/starter.git
-	branch = main
