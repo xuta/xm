@@ -102,7 +102,9 @@
   programs.dircolors.enable = true;
   programs.bash = {
     enable = true;
-    initExtra = ''
+    bashrcExtra = ''
+      # Force reload ~/.profile for new interactive sessions
+      test -f ~/.profile && unset __HM_SESS_VARS_SOURCED && source ~/.profile
       export PS1="\[\033[m\]|\[\033[1;35m\]\t\[\033[m\]|\[\e[1m\]\u\[\e[1;36m\]\[\033[m\]@\[\e[1;36m\]\h\[\033[m\]:\[\e[0m\]\[\e[1;32m\]\w > \[\e[0m\]"
     '';
     shellAliases = {
@@ -123,6 +125,14 @@
   programs.fzf = {
     enable = true;
     enableBashIntegration = true;
+    defaultOptions = [
+      "--height 40%"
+      "--layout=reverse"
+    ];
+    defaultCommand = "fd --type f";
+    fileWidgetOptions = [
+      "--preview 'bat -n --color=always {}'"
+    ];
   };
 
   programs.helix = {
