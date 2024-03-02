@@ -14,6 +14,13 @@
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
   home.stateVersion = "23.11"; # Please read the comment before changing.
+  nixpkgs.config.allowUnfree = true;
+
+  
+  nixpkgs.config.permittedInsecurePackages = [
+    "openssl-1.1.1w"
+    "electron-25.9.0"
+  ];
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -26,21 +33,40 @@
     wget
     curl
     git
-    lazygit
+    vim
+    xclip
 
+    lazygit
+    delta  # diff tool
     bat
     jq
     fd
     ripgrep
-
     ranger
+    lf
     tmux
-    vim
-    xclip
 
-    # (
-    #   nerdfonts.override { fonts = [ "FiraCode" ]; }
-    # )
+    hugo  # website framework for markdown
+    syncthing
+    syncthingtray
+    anki-bin
+    mpv  # for audio in Anki
+    google-chrome
+    firefox
+    meld
+    spotify
+    vlc
+    slack
+    sublime4
+    sublime-merge
+    vscode
+    obsidian
+    transmission_4-qt
+    telegram-desktop
+    zoom-us
+    citrix_workspace
+
+    xorg.xkill
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -112,6 +138,10 @@
       grep = "grep --color=auto";
       fgrep = "fgrep --color=auto";
       egrep = "egrep --color=auto";
+
+      xm = "cd ~xuta/workspace/xm";
+      nixin = "c ~xuta/workspace/nixin";
+      thinkfan-info = "cat /proc/acpi/ibm/fan";
     };
   };
 
@@ -139,7 +169,8 @@
     enable = true;
     defaultEditor = true;
     settings = {
-      theme = "dracula";
+      # theme = "dracula";
+      theme = "dracula_at_night";
 
       editor = {
         true-color = true;
