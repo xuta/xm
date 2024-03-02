@@ -132,6 +132,7 @@
       # Force reload ~/.profile for new interactive sessions
       test -f ~/.profile && unset __HM_SESS_VARS_SOURCED && source ~/.profile
       export PS1="\[\033[m\]|\[\033[1;35m\]\t\[\033[m\]|\[\e[1m\]\u\[\e[1;36m\]\[\033[m\]@\[\e[1;36m\]\h\[\033[m\]:\[\e[0m\]\[\e[1;32m\]\w > \[\e[0m\]"
+      export PATH=$HOME/bin:$PATH
     '';
     shellAliases = {
       ls = "ls --color=auto";
@@ -140,7 +141,7 @@
       egrep = "egrep --color=auto";
 
       xm = "cd ~xuta/workspace/xm";
-      nixin = "c ~xuta/workspace/nixin";
+      nixin = "cd ~xuta/workspace/nixin";
       thinkfan-info = "cat /proc/acpi/ibm/fan";
     };
   };
