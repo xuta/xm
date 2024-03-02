@@ -30,11 +30,13 @@
     htop
     ncdu
     unzip
+    xz
     wget
     curl
     git
     vim
     xclip
+    xorg.xkill
 
     lazygit
     delta  # diff tool
@@ -65,8 +67,6 @@
     telegram-desktop
     zoom-us
     citrix_workspace
-
-    xorg.xkill
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -141,7 +141,8 @@
       egrep = "egrep --color=auto";
 
       xm = "cd ~xuta/workspace/xm";
-      nixin = "cd ~xuta/workspace/nixin";
+      xme = "hx ~xuta/workspace/xm/home.nix";
+      nixin = "cd ~xuta/workspace/nixin/laptop";
       thinkfan-info = "cat /proc/acpi/ibm/fan";
     };
   };
@@ -193,6 +194,8 @@
       };
     };
   };
+
+  # programs.java.enable = true;
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
