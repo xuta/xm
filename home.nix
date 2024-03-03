@@ -86,8 +86,7 @@
     tmux = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       setup_tmux() {
         echo "setup tmux"
-        $DRY_RUN_CMD ln -nfs ${config.home.homeDirectory}/.config/home-manager/.tmux/.tmux.conf ~/
-        $DRY_RUN_CMD ln -nfs ${config.home.homeDirectory}/.config/home-manager/.tmux/.tmux.conf.local ~/
+        $DRY_RUN_CMD ln -nfs ${config.home.homeDirectory}/.config/home-manager/home/.tmux.conf ~/
       }
       
       [ -f ~/.tmux.conf ] || setup_tmux
@@ -191,6 +190,14 @@
 
       keys.normal = {
         space.space = "file_picker";
+        "+" = {
+          x = ":cd ~xuta/workspace/xm";
+          n = ":cd ~xuta/workspace/nixin/laptop";
+        };
+        "=" = {
+          h = ":open ~xuta/workspace/xm/home.nix";
+          c = ":open ~xuta/workspace/nixin/laptop/configuration.nix";
+        };
       };
     };
   };
