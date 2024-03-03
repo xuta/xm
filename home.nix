@@ -170,7 +170,6 @@
     enable = true;
     defaultEditor = true;
     settings = {
-      # theme = "dracula";
       theme = "dracula_at_night";
 
       editor = {
@@ -191,12 +190,12 @@
       keys.normal = {
         space.space = "file_picker";
         "+" = {
-          x = ":cd ~xuta/workspace/xm";
-          n = ":cd ~xuta/workspace/nixin/laptop";
+          x = ":cd ~/workspace/xm";
+          n = ":cd ~/workspace/nixin/laptop";
         };
         "=" = {
-          h = ":open ~xuta/workspace/xm/home.nix";
-          c = ":open ~xuta/workspace/nixin/laptop/configuration.nix";
+          h = ":open ~/workspace/xm/home.nix";
+          c = ":open ~/workspace/nixin/laptop/configuration.nix";
         };
       };
     };
