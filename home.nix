@@ -196,6 +196,7 @@
         cursorline = true;
         bufferline = "always";
         rulers = [90 120];
+        line-number = "relative";
 
         file-picker.hidden = false;
         soft-wrap.enable = true;
