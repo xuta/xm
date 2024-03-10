@@ -28,6 +28,7 @@
     gcc
     unixtools.top
     htop
+    file
     ncdu
     unzip
     xz
@@ -37,6 +38,12 @@
     vim
     xclip
     xorg.xkill
+
+    # Nix
+    nixos-shell # visualization
+    nvd  # diff build versions
+    nil  # Nix language server
+    comma # Run software without installing it https://github.com/nix-community/comma
 
     lazygit
     delta  # diff tool
@@ -101,6 +108,10 @@
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
 
+    # Don't put .tmux.conf here,
+    # because you will need to rebuild home-manager before reloading tmux config
+    # ".tmux.conf".source = home/.tmux.conf;
+
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
     #   org.gradle.console=verbose
@@ -132,6 +143,14 @@
       test -f ~/.profile && unset __HM_SESS_VARS_SOURCED && source ~/.profile
       export PS1="\[\033[m\]|\[\033[1;35m\]\t\[\033[m\]|\[\e[1m\]\u\[\e[1;36m\]\[\033[m\]@\[\e[1;36m\]\h\[\033[m\]:\[\e[0m\]\[\e[1;32m\]\w > \[\e[0m\]"
       export PATH=$HOME/bin:$PATH
+
+      xcopy() {
+        xclip -selection clipboard
+      }
+
+      xpaste() {
+        xclip -o -selection clipboard
+      }
     '';
     shellAliases = {
       ls = "ls --color=auto";
