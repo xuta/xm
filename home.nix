@@ -153,6 +153,7 @@
       }
     '';
     shellAliases = {
+      source-bashrc = "source ~/.bashrc";
       ls = "ls --color=auto";
       grep = "grep --color=auto";
       fgrep = "fgrep --color=auto";
@@ -222,6 +223,26 @@
   };
 
   # programs.java.enable = true;
+
+  systemd.user.services = {
+    sample-home = {
+      Unit = {
+        Description = "systemd for user level testing";
+      };
+      Install = {
+        WantedBy = [ "default.target" ];
+      };
+      Service = {
+        Type = "exec";
+        ExecStart = "${pkgs.writeShellScript "sample-home" ''
+          while true; do
+            ${pkgs.coreutils}/bin/date >> /tmp/sample-home.log
+            ${pkgs.coreutils}/bin/sleep 10
+          done
+        ''}";
+      };
+    };
+  };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
