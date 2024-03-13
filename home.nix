@@ -152,6 +152,18 @@
       xpaste() {
         xclip -o -selection clipboard
       }
+
+      # remove blank lines
+      # accept both argument and stdin
+      xremove_blank_line() {
+        egrep -v "^[\t ]*$" "$@"
+      }
+
+      # remove comments
+      # accept both argument and stdin
+      xremove_comment() {
+        egrep -v "^[\t ]*#" "$@"
+      }
     '';
     shellAliases = {
       source-bashrc = "source ~/.bashrc";
