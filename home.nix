@@ -110,6 +110,7 @@
 
     # Don't put .tmux.conf here,
     # because you will need to rebuild home-manager before reloading tmux config
+    # ".tmux.conf".source = config.lib.file.mkOutOfStoreSymlink home/.tmux.conf;
     # ".tmux.conf".source = home/.tmux.conf;
 
     # # You can also set the file content immediately.
@@ -224,25 +225,26 @@
 
   # programs.java.enable = true;
 
-  systemd.user.services = {
-    sample-home = {
-      Unit = {
-        Description = "systemd for user level testing";
-      };
-      Install = {
-        WantedBy = [ "default.target" ];
-      };
-      Service = {
-        Type = "exec";
-        ExecStart = "${pkgs.writeShellScript "sample-home" ''
-          while true; do
-            ${pkgs.coreutils}/bin/date >> /tmp/sample-home.log
-            ${pkgs.coreutils}/bin/sleep 10
-          done
-        ''}";
-      };
-    };
-  };
+  # sample systemd service setup in user level
+  # systemd.user.services = {
+  #   sample-home = {
+  #     Unit = {
+  #       Description = "systemd for user level testing";
+  #     };
+  #     Install = {
+  #       WantedBy = [ "default.target" ];
+  #     };
+  #     Service = {
+  #       Type = "exec";
+  #       ExecStart = "${pkgs.writeShellScript "sample-home" ''
+  #         while true; do
+  #           ${pkgs.coreutils}/bin/date >> /tmp/sample-home.log
+  #           ${pkgs.coreutils}/bin/sleep 10
+  #         done
+  #       ''}";
+  #     };
+  #   };
+  # };
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
