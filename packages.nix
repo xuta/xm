@@ -52,6 +52,7 @@ with pkgs; [
     citrix_workspace
 
     calibre
+    tor-browser
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the

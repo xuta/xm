@@ -85,6 +85,7 @@ in
       test -f ~/.profile && unset __HM_SESS_VARS_SOURCED && source ~/.profile
       export PS1="\[\033[m\]|\[\033[1;35m\]\t\[\033[m\]|\[\e[1m\]\u\[\e[1;36m\]\[\033[m\]@\[\e[1;36m\]\h\[\033[m\]:\[\e[0m\]\[\e[1;32m\]\w > \[\e[0m\]"
       export PATH=$HOME/bin:$PATH
+      export GOPATH=~/go:$GOPATH
 
       xcopy() {
         xclip -selection clipboard
@@ -176,7 +177,20 @@ in
     };
   };
 
+  programs.go = {
+    enable = true;
+    packages = {
+      # "golang.org/x/text" = builtins.fetchGit "https://go.googlesource.com/text";
+      # "golang.org/x/time" = builtins.fetchGit "https://go.googlesource.com/time";
+    };
+  };
+
   # programs.java.enable = true;
+
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 
   # sample systemd service setup in user level
   # systemd.user.services = {
